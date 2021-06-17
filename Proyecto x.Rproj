@@ -1,0 +1,102 @@
+# Proyecto X
+
+
+library(dplyr)
+library(ggplot2)
+library(hrbrthemes)
+library(package)
+
+library(readxl)
+
+liberia_datos_climaticos <- read.csv("liberia_datos_climaticos.csv",
+                                     sep = ",",
+                                     na.strings = "", 
+                                     dec = ",")
+
+str(liberia_datos_climaticos)
+
+liberia_datos_climaticos <-
+  liberia_datos_climaticos %>%
+  rename( Humedad_Relativa = HumedadRelativa....)
+
+liberia_datos_climaticos <-
+  liberia_datos_climaticos %>%
+  rename( Temperatura = Temperatura..Celsius.)
+
+liberia_datos_climaticos <-
+  liberia_datos_climaticos %>%
+  rename( Velocidad_Viento = VelocidadViento..m.s. )
+
+liberia_datos_climaticos <-
+  liberia_datos_climaticos %>%
+  rename( Lluvia = Lluvia..mm.)
+
+liberia_datos_climaticos <-
+  liberia_datos_climaticos %>%
+  rename( Irradiacion = Irradiacion..W.m2. )
+
+liberia_datos_climaticos <-
+  liberia_datos_climaticos %>%
+  rename( Evapotranspiracion = EvapoTranspiracion..mm. )
+
+# Histogramas de variables
+
+ggplot(liberia_datos_climaticos, aes(x = Velocidad_Viento)) +
+  geom_histogram(binwidth = 2,
+                 color = "blue",
+                 fill = "red") +
+  facet_grid() +
+  ggtitle("Velocidad del viento en Liberia") +
+  xlab("Rango") +
+  ylab("m.s") 
+
+ggplot(liberia_datos_climaticos, aes(x = Irradiacion)) +
+  geom_histogram(binwidth = 9,
+                 color = "blue",
+                 fill = "red") +
+  facet_grid() +
+  ggtitle("Irradiacion en Liberia") +
+  xlab("Rango") +
+  ylab("m.m") +
+  theme_ipsum()
+
+ggplot(liberia_datos_climaticos, aes(x = Humedad_Relativa)) +
+  geom_histogram(binwidth =  2,
+                 color = "yellow",
+                 fill = "white") +
+  facet_grid() +
+  ggtitle("Humedad en Liberia") +
+  xlab("Rango") +
+  ylab("%") +
+  theme_ipsum()
+
+ggplot(liberia_datos_climaticos, aes(x = Temperatura)) +
+  geom_histogram(binwidth =  1,
+                 color = "yellow",
+                 fill = "white") +
+  facet_grid() +
+  ggtitle("Temperatura en Liberia") +
+  xlab("Rango") +
+  ylab("Celsius") +
+  theme_ipsum()
+
+
+ggplot(liberia_datos_climaticos, aes(x = Evapotranspiracion)) +
+  geom_histogram(binwidth =  2,
+                 color = "yellow",
+                 fill = "white") +
+  facet_grid() +
+  ggtitle("Evapotranspiracion en Liberia") +
+  xlab("Rango") +
+  ylab("m.m") +
+  theme_ipsum()
+
+ggplot(liberia_datos_climaticos, aes(x = Lluvia)) +
+  geom_histogram(binwidth =  10,
+                 color = "yellow",
+                 fill = "white") +
+  facet_grid() +
+  ggtitle("Precipitacion en Liberia") +
+  xlab("Rango") +
+  ylab("m.m") +
+  theme_ipsum()
